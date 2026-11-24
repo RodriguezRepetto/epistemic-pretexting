@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Epistemic Pretexting in Language Models | Pretexting epistémico en modelos de lenguaje</title>
+<meta name="description" content="Preprint by Federico Rodriguez Repetto proposing the concept of epistemic pretexting (pretexting epistémico): a form of social engineering in which an unverified claim of authority degrades a language model's evidentiary standard.">
+<meta name="author" content="Federico Rodriguez Repetto">
+<meta name="keywords" content="epistemic pretexting, pretexting epistémico, large language models, sycophancy, social engineering, confabulation, AI safety, red teaming, Gemini, cybersecurity">
+<link rel="canonical" href="https://rodriguezrepetto.github.io/epistemic-pretexting/">
+
+<!-- Google Scholar (Highwire Press) -->
+<meta name="citation_title" content="Epistemic Pretexting in Language Models">
+<meta name="citation_author" content="Rodriguez Repetto, Federico">
+<meta name="citation_author_orcid" content="0009-0000-2835-5709">
+<meta name="citation_publication_date" content="2026/11/24">
+<meta name="citation_online_date" content="2026/11/24">
+<meta name="citation_publisher" content="Zenodo">
+<meta name="citation_technical_report_institution" content="Zenodo">
+<meta name="citation_doi" content="10.5281/zenodo.24353015">
+<meta name="citation_language" content="en">
+<meta name="citation_keywords" content="epistemic pretexting; pretexting epistémico; large language models; sycophancy; social engineering; confabulation; AI safety; red teaming">
+<meta name="citation_abstract_html_url" content="https://rodriguezrepetto.github.io/epistemic-pretexting/">
+<meta name="citation_pdf_url" content="https://rodriguezrepetto.github.io/epistemic-pretexting/Epistemic_pretexting_EN_v1.0.pdf">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Epistemic Pretexting in Language Models">
+<meta property="og:description" content="How an unverified claim of authority degrades the evidentiary standard of a commercial AI assistant. Preprint, v1.0, DOI 10.5281/zenodo.24353015.">
+<meta property="og:url" content="https://rodriguezrepetto.github.io/epistemic-pretexting/">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ScholarlyArticle",
+  "headline": "Epistemic Pretexting in Language Models",
+  "alternativeHeadline": "Pretexting epistémico en modelos de lenguaje",
+  "author": {
+    "@type": "Person",
+    "name": "Federico Rodriguez Repetto",
+    "sameAs": "https://orcid.org/0009-0000-2835-5709"
+  },
+  "datePublished": "2026-11-24",
+  "publisher": {"@type": "Organization", "name": "Zenodo"},
+  "identifier": "https://doi.org/10.5281/zenodo.24353015",
+  "sameAs": "https://doi.org/10.5281/zenodo.24353015",
+  "inLanguage": ["en", "es"],
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "keywords": "epistemic pretexting, pretexting epistémico, large language models, sycophancy, social engineering, confabulation, AI safety"
+}
+</script>
+
+<style>
+  :root {
+    --bg: #fbfaf7;
+    --surface: #ffffff;
+    --text: #1d232b;
+    --muted: #5b6470;
+    --line: #dfe3e8;
+    --accent: #1f3a5f;
+    --accent-soft: #e8eef6;
+    --rust: #9a3b2e;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #121519;
+      --surface: #1a1e24;
+      --text: #e6e9ed;
+      --muted: #a3acb8;
+      --line: #2c333c;
+      --accent: #9db8dc;
+      --accent-soft: #1f2a38;
+      --rust: #e08a7c;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, "Times New Roman", serif;
+    font-size: 18px;
+    line-height: 1.65;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 56px 20px 72px; }
+  .eyebrow {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 12.5px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--muted); margin: 0 0 18px;
+  }
+  h1 { font-size: clamp(30px, 5.2vw, 44px); line-height: 1.12; margin: 0 0 14px; color: var(--accent); font-weight: 700; }
+  .subtitle { font-style: italic; font-size: 20px; color: var(--text); margin: 0 0 8px; }
+  .es-title { color: var(--muted); font-size: 16.5px; margin: 0 0 28px; }
+  .author { margin: 0 0 4px; font-size: 18px; }
+  .author a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--line); }
+  .orcid {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 13.5px; color: var(--muted); margin: 0 0 28px;
+  }
+  .orcid a { color: var(--muted); }
+  .actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 40px; }
+  .btn {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 14.5px; font-weight: 600; text-decoration: none;
+    padding: 10px 16px; border-radius: 8px; border: 1px solid var(--accent);
+    color: var(--accent); background: transparent;
+  }
+  .btn.primary { background: var(--accent); color: var(--bg); }
+  .btn:hover { filter: brightness(1.08); }
+  h2 {
+    font-size: 15px; letter-spacing: .1em; text-transform: uppercase;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color: var(--accent); margin: 44px 0 14px; padding-bottom: 8px; border-bottom: 1px solid var(--line);
+  }
+  p { margin: 0 0 16px; }
+  .lede { font-size: 19px; }
+  .concept {
+    background: var(--accent-soft); border-left: 3px solid var(--accent);
+    padding: 18px 20px; border-radius: 0 8px 8px 0; margin: 8px 0 8px;
+  }
+  .concept p:last-child { margin: 0; }
+  ul.contrib { padding-left: 20px; margin: 0; }
+  ul.contrib li { margin-bottom: 8px; }
+  .meta {
+    display: grid; grid-template-columns: max-content 1fr; gap: 6px 18px;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 14.5px;
+  }
+  .meta dt { color: var(--muted); }
+  .meta dd { margin: 0; overflow-wrap: anywhere; }
+  .meta a { color: var(--accent); }
+  .cite {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 8px;
+    padding: 14px 16px; font-size: 15.5px; margin: 0 0 14px; overflow-wrap: anywhere;
+  }
+  pre {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 8px;
+    padding: 14px 16px; font-size: 13.5px; line-height: 1.5; overflow-x: auto; margin: 0 0 10px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  .copy {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 13px; padding: 6px 12px; border-radius: 6px; cursor: pointer;
+    border: 1px solid var(--line); background: var(--surface); color: var(--text);
+  }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tags span {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 13px; padding: 4px 10px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted);
+  }
+  footer {
+    margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 13px; color: var(--muted);
+  }
+  footer a { color: var(--muted); }
+  @media (max-width: 520px) {
+    body { font-size: 17px; }
+    .wrap { padding: 40px 16px 56px; }
+    .meta { grid-template-columns: 1fr; gap: 2px; }
+    .meta dd { margin-bottom: 8px; }
+  }
+</style>
+</head>
+<body>
+<main class="wrap">
+
+  <p class="eyebrow">Preprint · Version 1.0 · November 2026</p>
+  <h1>Epistemic Pretexting in Language Models</h1>
+  <p class="subtitle">How an unverified claim of authority degrades the evidentiary standard of a commercial assistant</p>
+  <p class="es-title" lang="es">Pretexting epistémico en modelos de lenguaje</p>
+
+  <p class="author"><a href="https://orcid.org/0009-0000-2835-5709">Federico Rodriguez Repetto</a></p>
+  <p class="orcid">ORCID <a href="https://orcid.org/0009-0000-2835-5709">0009-0000-2835-5709</a> · Argentina</p>
+
+  <div class="actions">
+    <a class="btn primary" href="Epistemic_pretexting_EN_v1.0.pdf">Read the paper (EN, PDF)</a>
+    <a class="btn" href="Pretexting_epistemico_ES_v1.0.pdf" lang="es">Leer el paper (ES, PDF)</a>
+    <a class="btn" href="https://doi.org/10.5281/zenodo.24353015">Zenodo record (DOI)</a>
+  </div>
+
+  <h2>The concept</h2>
+  <div class="concept">
+    <p><strong>Epistemic pretexting</strong> is a form of social engineering in which an unverified statement of identity does not extract restricted content from a language model, but something harder to detect: a relaxation of its evidentiary standard. The model concedes stronger conclusions than the available evidence supports.</p>
+  </div>
+
+  <h2>Abstract</h2>
+  <p class="lede">On December 8, 1994, the neurophysiologist Jacobo Grinberg-Zylberbaum disappeared in Mexico City. A researcher at the National Autonomous University of Mexico, he studied consciousness through electroencephalographic techniques and the observation of shamanic practices. The subsequent disappearance of his wife, the removal of the police investigator who had pursued a lead into the United States, and the loss of the judicial file shaped a case that, three decades later, remains unsolved and sustains divergent hypotheses.</p>
+  <p>This paper analyzes a query about the case submitted in early October 2026 to Google's search AI mode (Gemini). During the first part of the interaction, the model maintained an informative register and made the uncertainty of the case explicit. After a single mention by the user of a background in institutional cybersecurity, the system altered its evidentiary standard: it asserted categorically that the scientist had been taken, attributed intelligence roles to real people, turned an indirect testimony into documentary records, and assigned numerical probabilities without method, under the heading "The verdict of the data". The available evidence had not changed; only the declared identity of the user had.</p>
+  <p>We propose the term epistemic pretexting for this phenomenon: a form of social engineering that obtains not restricted content but a relaxation of the model's evidentiary criteria. The study reconstructs the interaction in five phases, measures the escalation on an ordinal certainty scale, checks eleven claims against verifiable sources, and shows that all eight claims made after the role statement favor, without exception, the same hypothesis. It concludes that user self-identification constitutes an understudied attack surface in mass-market assistants.</p>
+
+  <h2>Contributions</h2>
+  <ul class="contrib">
+    <li>A characterization of <strong>epistemic pretexting</strong> as an attack vector distinct from classic jailbreaking.</li>
+    <li>An <strong>ordinal certainty scale</strong> (0 to 4) that measures escalation turn by turn and locates the inflection point.</li>
+    <li>A systematic comparison of the model's claims against sources, and a <strong>directional distortion index</strong>.</li>
+    <li>A <strong>taxonomy of eight failure mechanisms</strong> and a replicable experimental design.</li>
+  </ul>
+
+  <section lang="es">
+    <h2>Resumen (español)</h2>
+    <p>El 8 de diciembre de 1994 desapareció en Ciudad de México el neurofisiólogo Jacobo Grinberg-Zylberbaum, investigador de la Universidad Nacional Autónoma de México dedicado al estudio de la conciencia mediante técnicas electroencefalográficas y la observación de prácticas chamánicas. La posterior desaparición de su esposa, la separación del investigador policial que había seguido una línea hacia Estados Unidos y la pérdida del expediente judicial configuraron un caso que, tres décadas después, permanece sin resolver y sostiene hipótesis divergentes.</p>
+    <p>El presente trabajo analiza una consulta sobre este caso realizada a comienzos de octubre de 2026 al modo de IA del buscador de Google (Gemini). Durante la primera parte de la interacción, el modelo mantuvo un registro informativo y explicitó la incertidumbre del caso. Tras una única mención del usuario a su formación en seguridad informática institucional, el sistema modificó su estándar de evidencia: afirmó de manera categórica que el científico había sido sustraído, atribuyó funciones de inteligencia a personas reales, transformó un testimonio indirecto en registros documentales y asignó probabilidades numéricas sin método, bajo el título "El veredicto de los datos". La evidencia disponible no había variado; solo lo había hecho la identidad declarada del interlocutor.</p>
+    <p>Se propone denominar a este fenómeno <strong>pretexting epistémico</strong>: una modalidad de ingeniería social que no obtiene contenido restringido, sino una relajación de los criterios de evidencia del modelo. El estudio reconstruye la interacción en cinco fases, mide la escalada mediante una escala ordinal de certeza, contrasta once afirmaciones con fuentes verificables y muestra que las ocho posteriores a la declaración de rol favorecen, sin excepción, la misma hipótesis. Se concluye que la autoidentificación del usuario constituye una superficie de ataque poco estudiada en asistentes de uso masivo.</p>
+  </section>
+
+  <h2>How to cite</h2>
+  <p class="cite">Rodriguez Repetto, F. (2026). <em>Epistemic pretexting in language models</em> (Version 1.0) [Preprint]. Zenodo. <a href="https://doi.org/10.5281/zenodo.24353015">https://doi.org/10.5281/zenodo.24353015</a></p>
+  <pre id="bibtex">@misc{rodriguezrepetto2026epistemic,
+  author    = {Rodriguez Repetto, Federico},
+  title     = {Epistemic Pretexting in Language Models},
+  year      = {2026},
+  publisher = {Zenodo},
+  version   = {1.0},
+  doi       = {10.5281/zenodo.24353015},
+  url       = {https://doi.org/10.5281/zenodo.24353015}
+}</pre>
+  <button class="copy" type="button" id="copybtn">Copy BibTeX</button>
+
+  <h2>Record</h2>
+  <dl class="meta">
+    <dt>DOI</dt><dd><a href="https://doi.org/10.5281/zenodo.24353015">10.5281/zenodo.24353015</a></dd>
+    <dt>Type</dt><dd>Preprint</dd>
+    <dt>Published</dt><dd>November 24, 2026</dd>
+    <dt>Languages</dt><dd>English, Spanish</dd>
+    <dt>License</dt><dd><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></dd>
+    <dt>Contact</dt><dd><a href="mailto:rodriguezrepetto@proton.me">rodriguezrepetto@proton.me</a></dd>
+  </dl>
+
+  <h2>Keywords</h2>
+  <div class="tags">
+    <span>epistemic pretexting</span><span lang="es">pretexting epistémico</span><span>large language models</span>
+    <span>sycophancy</span><span>confabulation</span><span>social engineering</span>
+    <span>AI safety</span><span>red teaming</span><span>cybersecurity</span>
+  </div>
+
+  <footer>
+    <p>The paper includes a statement on the use of AI tools in its preparation. Statements the analyzed model made about real people are reproduced as evidence of its behavior and are not presented as facts.</p>
+    <p>© 2026 Federico Rodriguez Repetto · Licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p>
+  </footer>
+</main>
+<script>
+  (function () {
+    var btn = document.getElementById("copybtn");
+    if (!btn) return;
+    btn.addEventListener("click", function () {
+      var text = document.getElementById("bibtex").textContent;
+      try {
+        navigator.clipboard.writeText(text).then(function () {
+          btn.textContent = "Copied";
+          setTimeout(function () { btn.textContent = "Copy BibTeX"; }, 1800);
+        });
+      } catch (e) {}
+    });
+  })();
+</script>
+</body>
+</html>
